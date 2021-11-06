@@ -1,0 +1,55 @@
+﻿@model LaptopStore.Models.Payment
+
+@{
+    ViewData["Title"] = "Payment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+<style>
+    .card {
+        margin: 0 auto; /* Added */
+        float: none; /* Added */
+        margin-bottom: 10px; /* Added */
+    }
+
+</style>
+
+<div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+    <div class="card-header">Payment <i class="fa fa-money-check-alt"></i></div>
+    <div class="card-body">
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <form method="post" asp-controller="Laptop" asp-action="Payment">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="CardNumber" class="control-label"></label>
+                        <input asp-for="CardNumber" class="form-control" />
+                        <span asp-validation-for="CardNumber" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Expiry" class="control-label"></label>
+                        <input asp-for="Expiry" class="form-control" />
+                        <span asp-validation-for="Expiry" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CVV" class="control-label"></label>
+                        <input asp-for="CVV" class="form-control" />
+                        <span asp-validation-for="CVV" class="text-danger"></span>
+                    </div>
+                    <div class="form-group fmy">
+                        @*<input type="submit" value="Pay" class="btn btn-primary" />*@
+                        @*<a asp-controller="Laptop" asp-action="Payment" class="btn btn-primary btn-block">Pay</a>*@
+                        <input type="submit" value="Pay" class="btn btn-primary btn-block" />
+
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+</div>

@@ -1,0 +1,67 @@
+﻿@model IEnumerable<LaptopStore.Models.Laptop>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    
+
+}
+
+<h1>@ViewBag.msg</h1>
+<style>
+    img {
+        margin-bottom: 15px;
+        transition: 0.3s ease-in-out;
+    }
+
+
+       img:hover {
+            transition: 0.3s ease-in-out;
+            transform: scale(1.1);
+        }
+
+    .carousel-inner img {
+        margin: auto;
+    }
+
+    
+
+    
+</style>
+
+
+
+<div class="row">
+
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4">
+            <img class="img-fluid" src=@item.Image height="auto" width="auto" />
+        </div>
+        <div class="col-md-8">
+            <h3>@item.ItemTitle</h3>
+            <br />
+            <h4>@item.Price </h4>
+            @{
+                Random r = new Random();
+                int num = r.Next(5);
+                DayOfWeek wk = DateTime.Today.AddDays(num).DayOfWeek;
+
+                }
+
+        <div class="row">
+            <div class="col-md-4">
+                <h4>Get it by @wk</h4>
+
+            </div>
+            <div class="col-md-4">
+                <a class="btn btn-primary btn-block" asp-controller="Laptop" asp-action="Details" asp-route-id="@item.Id">Details</a> 
+
+
+            </div>
+
+        </div>
+            
+            <hr/>
+        </div>
+        }
+</div>
