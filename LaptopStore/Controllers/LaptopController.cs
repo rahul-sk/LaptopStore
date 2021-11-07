@@ -2,6 +2,7 @@
 using LaptopStore.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 
 using System;
 using System.Collections.Generic;
@@ -26,8 +27,8 @@ namespace LaptopStore.Controllers
         }
         public IActionResult Index()
         {
-            string val1 = ((User != null) && User.Identity.IsAuthenticated )? "Logged In" : "Logged out";
-            ViewBag.msg = val1+" "+HttpContext.Session.GetString("email");
+            var curUser = HttpContext.Session.GetString("email");
+            ViewBag.usr = curUser;
             var laptops = laptopRepo.GetAll();
             return View(laptops);
         }
@@ -44,6 +45,8 @@ namespace LaptopStore.Controllers
             if (ModelState.IsValid)
             {
                 context.Customers.Add(c);
+                HttpContext.Session.SetString("email", c.Email);
+
                 context.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -78,12 +81,14 @@ namespace LaptopStore.Controllers
             if (ModelState.IsValid)
             {
                 string email = HttpContext.Session.GetString("email");
-                int id = customerRepo.GetCustIdByEmail(email);
+                int cid = customerRepo.GetCustIdByEmail(email);
                 Customer cust = customerRepo.GetCustByEmail(email);
                 int lid = int.Parse(HttpContext.Session.GetString("laptopId"));
                 var laptop = laptopRepo.Get(lid);
-                Orders ord = new Orders() { LaptopEnt=laptop,CustomerEnt=cust };
-                orderRepo.Add(ord);
+
+                context.Database.ExecuteSqlRaw($"insert into Orders values ({cid},{lid})");
+                //Orders ord = new Orders() { Laptops=laptop,Customers=cust,CustomerId=cid,LaptopId=lid };
+                //orderRepo.Add(ord);
                 return RedirectToAction("Confirmation");
             }
             else
@@ -102,13 +107,27 @@ namespace LaptopStore.Controllers
 
         public IActionResult CurrentOrders()
         {
+
             string email = HttpContext.Session.GetString("email");
+
             int id = customerRepo.GetCustIdByEmail(email);
             List<Orders> orders = orderRepo.GetByCustId(id);
             ViewBag.cnt = orders.Count;
+            
+            List<Laptop> laptops=new List<Laptop>();
+            if (orders.Count == 0)
+            {
+                return View(laptops);
+            }
+            foreach (var item in orders)
+            {
+                int lid = item.LaptopId;
+                Laptop lap = laptopRepo.Get(lid);
+                laptops.Add(lap);
+            }
 
 
-            return View();
+            return View(laptops);
         }
 
 

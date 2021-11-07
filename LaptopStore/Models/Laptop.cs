@@ -27,6 +27,7 @@ namespace LaptopStore.Models
         public string Width { get; set; }
         public string Battery { get; set; }
         public string Weight { get; set; }
+        public List<Orders> Orders { get; set; }
 
 
     }

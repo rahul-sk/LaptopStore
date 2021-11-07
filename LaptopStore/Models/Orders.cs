@@ -9,8 +9,8 @@ namespace LaptopStore.Models
     {
         public int Id { get; set; }
         public int CustomerId { get; set; }
-        public Customer CustomerEnt { get; set; }
+        public Customer Customers { get; set; }
         public int LaptopId { get; set; }
-        public Laptop LaptopEnt { get; set; }
+        public Laptop Laptops { get; set; }
     }
 }

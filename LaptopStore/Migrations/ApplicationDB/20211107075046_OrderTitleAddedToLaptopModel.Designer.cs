@@ -3,14 +3,16 @@ using LaptopStore.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LaptopStore.Migrations.ApplicationDB
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20211107075046_OrderTitleAddedToLaptopModel")]
+    partial class OrderTitleAddedToLaptopModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -82,6 +84,9 @@ namespace LaptopStore.Migrations.ApplicationDB
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ModelName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OrderTitle")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Price")

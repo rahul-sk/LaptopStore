@@ -22,6 +22,7 @@ namespace LaptopStore.Services
                 Orders b1 = item;
                 b1.Id = ords.Max(x => x.Id) + 1;
                 cxt.Orders.Add(b1);
+                cxt.SaveChanges();
                 return true;
             }
             catch (Exception e)

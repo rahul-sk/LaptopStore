@@ -29,6 +29,7 @@ namespace LaptopStore.Models
         [DataType(DataType.PhoneNumber)]
         [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
+        public List<Orders> Orders { get; set; }
 
     }
 }

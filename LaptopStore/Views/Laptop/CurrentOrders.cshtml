@@ -1,7 +1,10 @@
-﻿
+﻿@model IEnumerable<LaptopStore.Models.Laptop>
 @{
     ViewData["Title"] = "CurrentOrders";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    int cnt = int.Parse(ViewBag.cnt.ToString());
+    DateTime nw = DateTime.Now;
+    Random ran = new Random();
 }
 <style>
     .card {
@@ -50,8 +53,9 @@
         border-radius: .25rem;
     }
 </style>
+
+@if (cnt == 0) { 
 <div class="container">
-    <h1>@ViewBag.cnt</h1>
     <div class="card">
         <h5 class="card-title">My Orders</h5>
 
@@ -62,4 +66,23 @@
         <a asp-action="Index">Shop now</a>
     </div>
 </div>
+}
+
+else
+{
+    foreach (var item in Model)
+    {
+
+
+<div class="card" style="height: 16rem;">
+    <h5 class="card-header">@item.ItemTitle</h5>
+    <div class="card-body">
+        <h5 class="card-title"><span class="badge bg-primary">@item.Price</span></h5>
+        <p class="card-text"><span style="color:green;">Arriving by @nw.AddDays(ran.Next(5)).DayOfWeek</span></p>
+        <a href="#" class="btn btn-primary">Details</a>
+    </div>
+</div>
+    }
+
+}
 
