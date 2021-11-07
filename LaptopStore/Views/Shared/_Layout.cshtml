@@ -6,14 +6,23 @@
     <title>@ViewData["Title"] - LaptopStore</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+
 </head>
 <body>
-
+    <style>
+        .navtitle {
+            font-family: fantasy;
+        }
+    </style>
     @*navbar-light bg-white*@
     <header>
         <nav class="navbar navbar-dark bg-warning shadow-sm navbar-expand-sm navbar-toggleable-sm  border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Laptop" asp-action="Index">Rahul Store</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Laptop" asp-action="Index">
+                    <i class="fa fa-store"></i>
+                    <span class="navtitle">Laptop Store</span>
+                </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>

@@ -43,7 +43,10 @@
         <div class="col-md-8">
             <h3>@item.ItemTitle</h3>
             <br />
-            <h4>@item.Price </h4>
+            <h4>
+                <span class="badge badge-pill badge-success">  @item.Price</span>
+              
+            </h4>
             @{
                 Random r = new Random();
                 int num = r.Next(5);
